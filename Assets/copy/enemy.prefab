@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 5712893050641951743}
   - component: {fileID: 8965116388470305163}
   - component: {fileID: 2712476018422243721}
+  - component: {fileID: 3318182457948906629}
   m_Layer: 10
   m_Name: enemy
   m_TagString: enemy
@@ -292,6 +293,21 @@ MonoBehaviour:
   attack_Distance: 2
   chasePlayerAfterAttackDistance: 1
   attackPoint: {fileID: 3143711697151440087}
+--- !u!114 &3318182457948906629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062363606313683611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa59ece9e24d5184bbaf765ac8ced36d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  isPlayer: 0
+  health_UI: {fileID: 0}
 --- !u!1 &1522959181455378784
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +666,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   radius: 1
-  damege: 1
+  damege: 20
 --- !u!1 &3166636886265492599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,7 +1196,7 @@ GameObject:
   - component: {fileID: 2001817057360952201}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

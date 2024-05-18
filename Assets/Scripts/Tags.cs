@@ -6,6 +6,7 @@ public class Tags
 {
     // Start is called before the first frame update
     public const string PLAYER_TAG = "Player";
+    public const string ENEMY_TAG = "enemy";
 }
 public class AnimationTags
 {

@@ -9,9 +9,11 @@ public class PlayerAttackMovement : MonoBehaviour
 
 
     public GameObject attackPoint;
+    private PlayerShield shield;
     void Start()
     {
-     playerAnimation=GetComponent<Charanimation>();   
+     playerAnimation=GetComponent<Charanimation>(); 
+     shield=GetComponent<PlayerShield>();
     }
 
     // Update is called once per frame
@@ -19,10 +21,12 @@ public class PlayerAttackMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q)) {
             playerAnimation.Defend(true);
+            shield.AcitvateShield(true);
         }
         if(Input.GetKeyUp(KeyCode.Q)) {
             playerAnimation.UnfreezAnimation();
             playerAnimation.Defend(false);
+            shield.AcitvateShield(false);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {

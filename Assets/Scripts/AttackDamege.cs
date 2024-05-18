@@ -17,6 +17,7 @@ public class AttackDamege : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(transform.position, radius, layer);
         if (hits.Length > 0)
         {
+            hits[0].GetComponent<HealthScript>().ApplyDamege(damege);
             print("touch");
             gameObject.SetActive(false);
         }
