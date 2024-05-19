@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class HealthScript : MonoBehaviour
 {
     public float health = 100f;
@@ -16,6 +16,9 @@ public class HealthScript : MonoBehaviour
     private Image health_UI;
     [HideInInspector]
     public bool shieldActivated;
+    public GameObject pausethemenu;
+    public GameObject nextlev;
+
     void Update()
     {
         if (playerDied)
@@ -40,10 +43,15 @@ public class HealthScript : MonoBehaviour
         {
             GetComponent<Animator>().enabled = false;
             print("dead");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            //pausethemenu.SetActive(true);
 
-           StartCoroutine(AllowRotate());
+            StartCoroutine(AllowRotate());
             if(isPlayer)
             {
+
+                pausethemenu.SetActive(true);
                 GetComponent<PlayerMovement>().enabled = false;
                 GetComponent<PlayerAttackMovement>().enabled = false;
                 Camera.main.transform.SetParent(null);
@@ -51,6 +59,11 @@ public class HealthScript : MonoBehaviour
             }
             else
             {
+
+                nextlev.SetActive(true);
+                
+
+                //SceneManager.LoadSceneAsync(2);
                 GetComponent<EnemyController>().enabled = false;
                 GetComponentInChildren<NavMeshAgent>().enabled = false;
             }
@@ -67,6 +80,7 @@ public class HealthScript : MonoBehaviour
         playerDied = true;
         yield return new WaitForSeconds(rotate_time);
         playerDied=false;
+
     }
 }
 
