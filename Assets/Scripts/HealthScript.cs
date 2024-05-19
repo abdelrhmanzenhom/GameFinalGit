@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.Collections.LowLevel.Unsafe;
+
 public class HealthScript : MonoBehaviour
 {
     public float health = 100f;
@@ -18,7 +20,13 @@ public class HealthScript : MonoBehaviour
     public bool shieldActivated;
     public GameObject pausethemenu;
     public GameObject nextlev;
+    private static int cnt;
+    private static bool f;
 
+    void Start()
+    {
+        cnt = PlayerPrefs.GetInt("EnemyDeathCount", 0);
+    }
     void Update()
     {
         if (playerDied)
@@ -29,6 +37,7 @@ public class HealthScript : MonoBehaviour
 
     public void ApplyDamege(float damege)
     {
+        if ( f == true) { health += 100; f = false; }
         if (shieldActivated)
         {
             return;
@@ -46,7 +55,7 @@ public class HealthScript : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             //pausethemenu.SetActive(true);
-
+          
             StartCoroutine(AllowRotate());
             if(isPlayer)
             {
@@ -59,13 +68,27 @@ public class HealthScript : MonoBehaviour
             }
             else
             {
+                cnt++;
 
-                nextlev.SetActive(true);
-                
+               
 
+
+                print(cnt);
                 //SceneManager.LoadSceneAsync(2);
                 GetComponent<EnemyController>().enabled = false;
                 GetComponentInChildren<NavMeshAgent>().enabled = false;
+                Scene activeScene = SceneManager.GetActiveScene();
+                
+                if (cnt==1&& activeScene.buildIndex == 1)
+                {
+                    nextlev.SetActive(true);
+
+                }
+                else if (cnt>=3&&activeScene.buildIndex == 2)
+                {
+                    Time.timeScale = 0.0f;
+                    nextlev.SetActive(true);
+                }
             }
         }
     }

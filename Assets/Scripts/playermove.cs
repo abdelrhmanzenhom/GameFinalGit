@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Charanimation playeranimation;
+    
     public Camera playerCamera;
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+       
     }
 
     void Update() 
@@ -100,4 +102,5 @@ public class PlayerMovement : MonoBehaviour
             playeranimation.Walk(false);
         }
     }
+    
 }

@@ -28,7 +28,7 @@ public class Charanimation : MonoBehaviour
     {
         anim.SetTrigger(AnimationTags.ATTACK_TRIGGER_2);
     }
-    void FreezeAnimation()
+    public void FreezeAnimation()
     {
         anim.speed = 0f;
     }

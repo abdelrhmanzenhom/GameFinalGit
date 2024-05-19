@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class pausem : MonoBehaviour
 {
+    public bool f = false;
     public GameObject pause_menu;
     private bool isPaused = false;
     void Update()
@@ -48,7 +49,7 @@ public class pausem : MonoBehaviour
     }
     public void nextlevel()
     {
-
+        f = true;
         Time.timeScale = 1f;
         SceneManager.LoadSceneAsync(0);
 
