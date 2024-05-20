@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 public enum EnemyState
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
     private float attackTimer;
     private EnemyState enemyState;
     public GameObject attackPoint;
+    private ChracterSound sound;
     // Start is called before the first frame update
 
     void Awake()
@@ -28,6 +30,7 @@ public class EnemyController : MonoBehaviour
         enemy_Anim = GetComponent<Charanimation>();
         navAgent = GetComponent<NavMeshAgent>();
         playerTarget = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).transform;
+        sound = GetComponentInChildren<ChracterSound>();
 
     }
     void Start()
@@ -58,6 +61,7 @@ public class EnemyController : MonoBehaviour
             enemy_Anim.Walk(false);
         }
         else { enemy_Anim.Walk(true); }
+        //print(Vector3.Distance(transform.position, playerTarget.position));
         if (Vector3.Distance(transform.position, playerTarget.position) <= attack_Distance) { enemyState = EnemyState.ATTACK; }
     }
     void AttackPlayer()
@@ -70,8 +74,11 @@ public class EnemyController : MonoBehaviour
             if(Random.Range(0,2)>0)
             {
                 enemy_Anim.Attack1();
+                sound.Attack_1();
             }
-            else { enemy_Anim.Attack2();}
+            else { enemy_Anim.Attack2();
+                sound.Attack_2();
+            }
             attackTimer = 0;
         }
         if(Vector3.Distance(transform.position, playerTarget.position) > attack_Distance + chasePlayerAfterAttackDistance)

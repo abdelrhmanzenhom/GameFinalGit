@@ -10,10 +10,13 @@ public class PlayerAttackMovement : MonoBehaviour
 
     public GameObject attackPoint;
     private PlayerShield shield;
+    private ChracterSound sound;
     void Start()
     {
+        
      playerAnimation=GetComponent<Charanimation>(); 
      shield=GetComponent<PlayerShield>();
+        sound = GetComponentInChildren<ChracterSound>();
     }
 
     // Update is called once per frame
@@ -33,10 +36,12 @@ public class PlayerAttackMovement : MonoBehaviour
             if(Random.Range(0,2)>0)
             {
                 playerAnimation.Attack1();
+                sound.Attack_1();
             }
             else
             {
                 playerAnimation.Attack2();
+                sound.Attack_2();
             }
         }
        

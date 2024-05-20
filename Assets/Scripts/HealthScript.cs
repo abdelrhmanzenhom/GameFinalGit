@@ -22,10 +22,11 @@ public class HealthScript : MonoBehaviour
     public GameObject nextlev;
     private static int cnt;
     private static bool f;
-
+    private ChracterSound sound;
     void Start()
     {
-        cnt = PlayerPrefs.GetInt("EnemyDeathCount", 0);
+        sound = GetComponentInChildren<ChracterSound>();
+        cnt = 0;
     }
     void Update()
     {
@@ -37,7 +38,7 @@ public class HealthScript : MonoBehaviour
 
     public void ApplyDamege(float damege)
     {
-        if ( f == true) { health += 100; f = false; }
+        //if ( f == true) { health += 100; f = false; }
         if (shieldActivated)
         {
             return;
@@ -50,8 +51,9 @@ public class HealthScript : MonoBehaviour
         }
         if (health <= 0)
         {
+            sound.Dead();
             GetComponent<Animator>().enabled = false;
-            print("dead");
+           
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             //pausethemenu.SetActive(true);
@@ -61,6 +63,7 @@ public class HealthScript : MonoBehaviour
             {
 
                 pausethemenu.SetActive(true);
+
                 GetComponent<PlayerMovement>().enabled = false;
                 GetComponent<PlayerAttackMovement>().enabled = false;
                 Camera.main.transform.SetParent(null);
@@ -77,6 +80,7 @@ public class HealthScript : MonoBehaviour
                 //SceneManager.LoadSceneAsync(2);
                 GetComponent<EnemyController>().enabled = false;
                 GetComponentInChildren<NavMeshAgent>().enabled = false;
+
                 Scene activeScene = SceneManager.GetActiveScene();
                 
                 if (cnt==1&& activeScene.buildIndex == 1)
